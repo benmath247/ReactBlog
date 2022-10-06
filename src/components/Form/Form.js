@@ -9,12 +9,17 @@ function Form() {
     const [firstNameOnBlur, setFirstNameOnBlur] = useState(false)
     const [firstNameOnFocus, setfirstNameOnFocus] = useState(false)
 
+    const [lastName, setLastName] = useState("")
+    const [lastNameError, setLastNameError] = useState(false)
+    const [lastNameOnBlur, setLastNameOnBlur] = useState(false)
+    const [lastNameOnFocus, setLastNameOnFocus] = useState(false)
+
     function handleOnFirstNameChange(e) {
         setFirstName(e.target.value);
     }
 
     useEffect(() => {
-        if (firstNameOnBlur || firstNameOnFocus) {
+        if (firstNameOnBlur || (firstNameOnFocus && firstName.length > 1)) {
             if (firstName.length === 0) {
                 setFirstNameError("First name cannot be empty")
             }
@@ -23,6 +28,21 @@ function Form() {
             } else { setFirstNameError(false) }
         }
     }, [firstName, firstNameOnBlur])
+
+    function handleOnLastNameChange(e) {
+        setLastName(e.target.value);
+    }
+
+    useEffect(() => {
+        if (lastNameOnBlur || (lastNameOnFocus && lastName.length > 1)) {
+            if (lastName.length === 0) {
+                setLastNameError("Last name cannot be empty")
+            }
+            else if (!isAlpha(lastName)) {
+                setLastNameError("Last name cannot have special characters")
+            } else { setLastNameError(false) }
+        }
+    })
 
     return (
         <div className="form-container">
@@ -41,8 +61,8 @@ function Form() {
                                 name="firstName"
                                 value={firstName}
                                 onChange={handleOnFirstNameChange}
-                                onBlur={() => {setFirstNameOnBlur(true)}}
-                                onFocus={()=>{setfirstNameOnFocus(true)}}
+                                onBlur={() => { setFirstNameOnBlur(true) }}
+                                onFocus={() => { setfirstNameOnFocus(true) }}
                             />
                         </div>
                         {firstNameError && <ErrorMessage errorMessage={firstNameError} />}
@@ -55,8 +75,13 @@ function Form() {
                                 type="text"
                                 placeholder="Last name"
                                 name="lastName"
+                                value={lastName}
+                                onChange={handleOnLastNameChange}
+                                onBlur={() => { setLastNameOnBlur(true) }}
+                                onFocus={() => { setLastNameOnFocus(true) }}
                             />
                         </div>
+                        {lastNameError && <ErrorMessage errorMessage={lastNameError} />}
                     </div>
 
                     <div className="form-input-container">
