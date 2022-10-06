@@ -2,47 +2,11 @@ import React, { useState, useEffect } from "react";
 import { isAlpha } from "validator"
 import ErrorMessage from "../Error/ErrorMessage";
 import "./Form.css";
+import useInputCheck from "../hooks/InputCheck";
 
 function Form() {
-    const [firstName, setFirstName] = useState("")
-    const [firstNameError, setFirstNameError] = useState(false)
-    const [firstNameOnBlur, setFirstNameOnBlur] = useState(false)
-    const [firstNameOnFocus, setfirstNameOnFocus] = useState(false)
-
-    const [lastName, setLastName] = useState("")
-    const [lastNameError, setLastNameError] = useState(false)
-    const [lastNameOnBlur, setLastNameOnBlur] = useState(false)
-    const [lastNameOnFocus, setLastNameOnFocus] = useState(false)
-
-    function handleOnFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    useEffect(() => {
-        if (firstNameOnBlur || (firstNameOnFocus && firstName.length > 1)) {
-            if (firstName.length === 0) {
-                setFirstNameError("First name cannot be empty")
-            }
-            else if (!isAlpha(firstName)) {
-                setFirstNameError("First name cannot have special characters")
-            } else { setFirstNameError(false) }
-        }
-    }, [firstName, firstNameOnBlur])
-
-    function handleOnLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
-    useEffect(() => {
-        if (lastNameOnBlur || (lastNameOnFocus && lastName.length > 1)) {
-            if (lastName.length === 0) {
-                setLastNameError("Last name cannot be empty")
-            }
-            else if (!isAlpha(lastName)) {
-                setLastNameError("Last name cannot have special characters")
-            } else { setLastNameError(false) }
-        }
-    })
+    const [firstName, handleOnFirstNameChange, firstNameError, setFirstNameOnBlur, setfirstNameOnFocus] = useInputCheck("First name")
+    const [lastName, handleOnLastNameChange, lastNameError, setLastNameOnBlur, setLastNameOnFocus] = useInputCheck("First name")
 
     return (
         <div className="form-container">
