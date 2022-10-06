@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { isAlpha } from "validator"
+import ErrorMessage from "../Error/ErrorMessage";
 import "./Form.css";
 
 function Form() {
     const [firstName, setFirstName] = useState("")
-    const [error, setError] = useState(false)
+    const [firstNameError, setFirstNameError] = useState(false)
 
     function handleOnFirstNameChange(e) {
         setFirstName(e.target.value);
     }
+
+    useEffect(() => {
+        if (!isAlpha(firstName)) {
+            setFirstNameError("First name cannot have special characters")
+        } else { setFirstNameError(false) }
+    }, [firstName])
 
     return (
         <div className="form-container">
@@ -29,6 +36,7 @@ function Form() {
                                 onChange={handleOnFirstNameChange}
                             />
                         </div>
+                        {firstNameError && <ErrorMessage errorMessage={firstNameError}/>}
                     </div>
 
                     <div className="form-input-container">
