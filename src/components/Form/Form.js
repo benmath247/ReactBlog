@@ -6,16 +6,19 @@ import "./Form.css";
 function Form() {
     const [firstName, setFirstName] = useState("")
     const [firstNameError, setFirstNameError] = useState(false)
+    const [firstNameOnBlur, setFirstNameOnBlur] = useState(false)
 
     function handleOnFirstNameChange(e) {
         setFirstName(e.target.value);
     }
 
     useEffect(() => {
-        if (!isAlpha(firstName)) {
-            setFirstNameError("First name cannot have special characters")
-        } else { setFirstNameError(false) }
-    }, [firstName])
+        if (firstNameOnBlur) {
+            if (!isAlpha(firstName)) {
+                setFirstNameError("First name cannot have special characters")
+            } else { setFirstNameError(false) }
+        }
+    }, [firstName, firstNameOnBlur])
 
     return (
         <div className="form-container">
@@ -34,9 +37,10 @@ function Form() {
                                 name="firstName"
                                 value={firstName}
                                 onChange={handleOnFirstNameChange}
+                                onBlur={() => {setFirstNameOnBlur(true)}}
                             />
                         </div>
-                        {firstNameError && <ErrorMessage errorMessage={firstNameError}/>}
+                        {firstNameError && <ErrorMessage errorMessage={firstNameError} />}
                     </div>
 
                     <div className="form-input-container">
