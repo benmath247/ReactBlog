@@ -7,14 +7,18 @@ function Form() {
     const [firstName, setFirstName] = useState("")
     const [firstNameError, setFirstNameError] = useState(false)
     const [firstNameOnBlur, setFirstNameOnBlur] = useState(false)
+    const [firstNameOnFocus, setfirstNameOnFocus] = useState(false)
 
     function handleOnFirstNameChange(e) {
         setFirstName(e.target.value);
     }
 
     useEffect(() => {
-        if (firstNameOnBlur) {
-            if (!isAlpha(firstName)) {
+        if (firstNameOnBlur || firstNameOnFocus) {
+            if (firstName.length === 0) {
+                setFirstNameError("First name cannot be empty")
+            }
+            else if (!isAlpha(firstName)) {
                 setFirstNameError("First name cannot have special characters")
             } else { setFirstNameError(false) }
         }
@@ -38,6 +42,7 @@ function Form() {
                                 value={firstName}
                                 onChange={handleOnFirstNameChange}
                                 onBlur={() => {setFirstNameOnBlur(true)}}
+                                onFocus={()=>{setfirstNameOnFocus(true)}}
                             />
                         </div>
                         {firstNameError && <ErrorMessage errorMessage={firstNameError} />}
