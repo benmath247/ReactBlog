@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import isAlpha from 'validator'
-import ErrorMessage from '../Error/ErrorMessage'
+import {isAlpha} from 'validator'
 
 function useInputCheck(placeholder) {
 

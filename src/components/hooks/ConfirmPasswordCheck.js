@@ -9,10 +9,6 @@ function useConfirmedPasswordCheck(firstPassword) {
 
     useEffect(() => {
 
-        console.log("first", firstPassword)
-        console.log("confirmedPassword", confirmedPassword)
-
-
         if (onBlur || (onFocus && confirmedPassword.length > 1)) {
             if (confirmedPassword !== firstPassword) {
                 setError(`Passwords must match`)

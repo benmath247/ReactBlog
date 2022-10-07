@@ -6,15 +6,16 @@ import useEmailCheck from "../hooks/EmailCheck";
 import useUsernameCheck from "../hooks/UsernameCheck";
 import usePasswordCheck from "../hooks/PasswordCheck";
 import useConfirmedPasswordCheck from "../hooks/ConfirmPasswordCheck";
+import useDOBCheck from "../hooks/DOBCheck";
 
 function Form() {
-    const [firstName, handleOnFirstNameChange, firstNameError, setFirstNameOnBlur, setfirstNameOnFocus] = useInputCheck("First name")
-    const [lastName, handleOnLastNameChange, lastNameError, setLastNameOnBlur, setLastNameOnFocus] = useInputCheck("First name")
+    const [firstName, handleOnFirstNameChange, firstNameError, setFirstNameOnBlur, setFirstNameOnFocus] = useInputCheck("First name")
+    const [lastName, handleOnLastNameChange, lastNameError, setLastNameOnBlur, setLastNameOnFocus] = useInputCheck("Last name")
     const [email, handleOnEmailChange, emailError, setEmailOnBlur, setEmailOnFocus] = useEmailCheck("Email")
     const [username, handleOnUsernameChange, usernameError, setUsernameOnBlur, setUsernameOnFocus] = useUsernameCheck("Username")
     const [password, handleOnPasswordChange, passwordError, setPasswordOnBlur, setPasswordOnFocus] = usePasswordCheck()
     const [confirmedPassword, handleConfirmedPasswordOnChange, confirmedPasswordError, setConfirmedPasswordOnBlur, setConfirmedPasswordOnFocus] = useConfirmedPasswordCheck(password)
-
+    const [dob, handleDobOnChange, dobError, setDobOnBlur, setDobOnFocus] =useDOBCheck()
 
     return (
         <div className="form-container">
@@ -34,7 +35,7 @@ function Form() {
                                 value={firstName}
                                 onChange={handleOnFirstNameChange}
                                 onBlur={() => { setFirstNameOnBlur(true) }}
-                                onFocus={() => { setfirstNameOnFocus(true) }}
+                                onFocus={() => { setFirstNameOnFocus(true) }}
                             />
                         </div>
                         {firstNameError && <ErrorMessage errorMessage={firstNameError} />}
@@ -109,7 +110,7 @@ function Form() {
                             <input
                                 className="form-input"
                                 type="password"
-                                placeholder="password"
+                                placeholder="confirm password"
                                 name="password"
                                 value={confirmedPassword}
                                 onChange={handleConfirmedPasswordOnChange}
@@ -129,8 +130,14 @@ function Form() {
                                 type="date"
                                 id="start"
                                 name="dob"
+                                value={dob}
+                                onChange={handleDobOnChange}
+                                onBlur={() => { setDobOnBlur(true) }}
+                                onFocus={() => { setDobOnFocus(true) }}
                             />
                         </div>
+                        {dobError && <ErrorMessage errorMessage={dobError} />}
+                   
                         <div className="clear"></div>
                     </div>
 
