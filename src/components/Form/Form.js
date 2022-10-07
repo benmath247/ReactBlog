@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { isAlpha } from "validator"
 import ErrorMessage from "../Error/ErrorMessage";
 import "./Form.css";
 import useInputCheck from "../hooks/InputCheck";
+import useEmailCheck from "../hooks/EmailCheck";
+import useUsernameCheck from "../hooks/UsernameCheck";
 
 function Form() {
     const [firstName, handleOnFirstNameChange, firstNameError, setFirstNameOnBlur, setfirstNameOnFocus] = useInputCheck("First name")
     const [lastName, handleOnLastNameChange, lastNameError, setLastNameOnBlur, setLastNameOnFocus] = useInputCheck("First name")
+    const [email, handleOnEmailChange, emailError, setEmailOnBlur, setEmailOnFocus] = useEmailCheck("Email")
+    const [username, handleOnUsernameChange, usernameError, setUsernameOnBlur, setUsernameOnFocus] = useUsernameCheck("Username")
+
 
     return (
         <div className="form-container">
@@ -53,21 +57,31 @@ function Form() {
                             <input
                                 className="form-input"
                                 type="text"
-                                placeholder="username"
+                                placeholder="Username"
                                 name="username"
+                                value={username}
+                                onChange={handleOnUsernameChange}
+                                onBlur={() => { setUsernameOnBlur(true) }}
+                                onFocus={() => { setUsernameOnFocus(true) }}
                             />
                         </div>
+                        {usernameError && <ErrorMessage errorMessage={usernameError} />}
                     </div>
 
                     <div className="form-input-container">
                         <div>
                             <input
                                 className="form-input"
-                                type="email"
+                                type="text"
                                 placeholder="email"
                                 name="email"
+                                value={email}
+                                onChange={handleOnEmailChange}
+                                onBlur={() => { setEmailOnBlur(true) }}
+                                onFocus={() => { setEmailOnFocus(true) }}
                             />
                         </div>
+                        {emailError && <ErrorMessage errorMessage={emailError} />}
                     </div>
 
                     <div className="form-input-container">
