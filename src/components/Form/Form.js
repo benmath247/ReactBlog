@@ -4,12 +4,16 @@ import "./Form.css";
 import useInputCheck from "../hooks/InputCheck";
 import useEmailCheck from "../hooks/EmailCheck";
 import useUsernameCheck from "../hooks/UsernameCheck";
+import usePasswordCheck from "../hooks/PasswordCheck";
+import useConfirmedPasswordCheck from "../hooks/ConfirmPasswordCheck";
 
 function Form() {
     const [firstName, handleOnFirstNameChange, firstNameError, setFirstNameOnBlur, setfirstNameOnFocus] = useInputCheck("First name")
     const [lastName, handleOnLastNameChange, lastNameError, setLastNameOnBlur, setLastNameOnFocus] = useInputCheck("First name")
     const [email, handleOnEmailChange, emailError, setEmailOnBlur, setEmailOnFocus] = useEmailCheck("Email")
     const [username, handleOnUsernameChange, usernameError, setUsernameOnBlur, setUsernameOnFocus] = useUsernameCheck("Username")
+    const [password, handleOnPasswordChange, passwordError, setPasswordOnBlur, setPasswordOnFocus] = usePasswordCheck()
+    const [confirmedPassword, handleConfirmedPasswordOnChange, confirmedPasswordError, setConfirmedPasswordOnBlur, setConfirmedPasswordOnFocus] = useConfirmedPasswordCheck(password)
 
 
     return (
@@ -91,8 +95,13 @@ function Form() {
                                 type="password"
                                 placeholder="password"
                                 name="password"
+                                value={password}
+                                onChange={handleOnPasswordChange}
+                                onBlur={() => { setPasswordOnBlur(true) }}
+                                onFocus={() => { setPasswordOnFocus(true) }}
                             />
                         </div>
+                        {passwordError && <ErrorMessage errorMessage={passwordError} />}
                     </div>
 
                     <div className="form-input-container">
@@ -100,10 +109,15 @@ function Form() {
                             <input
                                 className="form-input"
                                 type="password"
-                                placeholder="confirm password"
-                                name="confirmPassword"
+                                placeholder="password"
+                                name="password"
+                                value={confirmedPassword}
+                                onChange={handleConfirmedPasswordOnChange}
+                                onBlur={() => { setConfirmedPasswordOnBlur(true) }}
+                                onFocus={() => { setConfirmedPasswordOnFocus(true) }}
                             />
                         </div>
+                        {passwordError && <ErrorMessage errorMessage={confirmedPasswordError} />}
                     </div>
 
                     <div className="float-left">
