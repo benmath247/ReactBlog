@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import ErrorMessage from "../Error/ErrorMessage";
-import "./Form.css";
-import useInputCheck from "../hooks/InputCheck";
-import useEmailCheck from "../hooks/EmailCheck";
-import useUsernameCheck from "../hooks/UsernameCheck";
-import usePasswordCheck from "../hooks/PasswordCheck";
-import useConfirmedPasswordCheck from "../hooks/ConfirmPasswordCheck";
-import useDOBCheck from "../hooks/DOBCheck";
+import React from "react";
+import ErrorMessage from "../../Error/ErrorMessage";
+import "./NewUserForm.css";
+import useInputCheck from "../../hooks/InputCheck";
+import useEmailCheck from "../../hooks/EmailCheck";
+import useUsernameCheck from "../../hooks/UsernameCheck";
+import usePasswordCheck from "../../hooks/PasswordCheck";
+import useConfirmedPasswordCheck from "../../hooks/ConfirmPasswordCheck";
+import useDOBCheck from "../../hooks/DOBCheck";
 
-function Form() {
+function NewUserForm() {
     const [firstName, handleOnFirstNameChange, firstNameError, setFirstNameOnBlur, setFirstNameOnFocus] = useInputCheck("First name")
     const [lastName, handleOnLastNameChange, lastNameError, setLastNameOnBlur, setLastNameOnFocus] = useInputCheck("Last name")
     const [email, handleOnEmailChange, emailError, setEmailOnBlur, setEmailOnFocus] = useEmailCheck("Email")
     const [username, handleOnUsernameChange, usernameError, setUsernameOnBlur, setUsernameOnFocus] = useUsernameCheck("Username")
     const [password, handleOnPasswordChange, passwordError, setPasswordOnBlur, setPasswordOnFocus] = usePasswordCheck()
     const [confirmedPassword, handleConfirmedPasswordOnChange, confirmedPasswordError, setConfirmedPasswordOnBlur, setConfirmedPasswordOnFocus] = useConfirmedPasswordCheck(password)
-    const [dob, handleDobOnChange, dobError, setDobOnBlur, setDobOnFocus] =useDOBCheck()
+    const [dob, handleDobOnChange, dobError, setDobOnBlur, setDobOnFocus] = useDOBCheck()
 
     return (
         <div className="form-container">
@@ -137,7 +137,7 @@ function Form() {
                             />
                         </div>
                         {dobError && <ErrorMessage errorMessage={dobError} />}
-                   
+
                         <div className="clear"></div>
                     </div>
 
@@ -174,4 +174,4 @@ function Form() {
     );
 }
 
-export default Form;
+export default NewUserForm;

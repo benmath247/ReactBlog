@@ -1,9 +1,9 @@
-import Form from './components/Form/Form'
+import AuthFormContainer from "./components/Forms/AuthFormContainer/AuthFormContainer";
 
 function App() {
   return (
     <div className="App">
-      <Form/>
+      <AuthFormContainer register='false' />
     </div>
   );
 }
