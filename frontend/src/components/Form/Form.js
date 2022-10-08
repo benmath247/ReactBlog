@@ -21,7 +21,7 @@ function Form() {
         <div className="form-container">
             <div className="form-div">
                 <div className="form-h1">
-                    <h1>Form</h1>
+                    <h1>New User Form</h1>
                 </div>
 
                 <form>
@@ -143,7 +143,7 @@ function Form() {
 
                     <div className="clear"></div>
                     <div className="form-input-container float-left">
-                        <div className="gender-container">
+                        {/* <div className="gender-container">
                             <label className="radio-inline">
                                 <input type="radio" />
                                 male
@@ -156,11 +156,17 @@ function Form() {
                                 <input type="radio" />
                                 other
                             </label>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="clear"></div>
                     <div className="button-container">
-                        <button>Submit</button>
+                        <button>Create New User</button>
+                    </div>
+                    <div className="button-container">
+                        <button>Register with Facebook</button>
+                    </div>
+                    <div className="button-container">
+                        <button>Register with Github</button>
                     </div>
                 </form>
             </div>

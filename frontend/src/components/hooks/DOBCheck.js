@@ -25,7 +25,6 @@ function useDOBCheck() {
         if (onBlur && !underAgeValidate(input)) {
             setError(`Must be 18+`)
         } else {setError(false)}
-        // console.log(underAgeValidate(input))
     }, [input, onBlur, onFocus])
 
     function handleOnChange(e) {
